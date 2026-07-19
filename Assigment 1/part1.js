@@ -291,5 +291,5 @@ console.log('========================');
 // "5" - 2 
 // "5" + 2
 
-// type conversion (done by the developer), while type coercion(done by JavaScript).
+// type conversion (done by the developer),type coercion(done by JavaScript).
 
