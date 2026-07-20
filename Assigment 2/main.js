@@ -98,7 +98,7 @@ function twoPathMerge(path1, path2) {
 {
     function createFolder(folderName) {
         try {
-            fs.mkdirSync(folderName)
+            fs.mkdirSync(folderName, { recursive: true })
             return "Success"
         } catch (error) {
             return "Not Success"
@@ -115,31 +115,59 @@ function twoPathMerge(path1, path2) {
 // 13. Emit a custom "login" event with a username parameter. (0.5 Grade)
 // • Input Example:"Ahmed"
 // • Output Example: “User logged in: Ahmed”
-
-
 {
-    // event.on("login" , (user)=>{
-    //     console.log(user.name + "user logged in");
-        
-    // })
-    // function login (name) {
+    event.on("login", (user) => {
+        console.log(`user logged in : ${user}`);
 
-    //     event.emit ("login" , {name})
-    // }
+    })
+    function login(name) {
+
+        event.emit("login", name)
+    }
 }
-// login("marwan")
+login("marwan")
 
 // 14. Read a file synchronously and log its contents. (1 Grade)
 // • Input Example:"./notes.txt"
 // • Output Example: the file content => “This is a note.”
+{
+    function readFile(filePath) {
+        return fs.readFileSync(filePath, { encoding: "utf-8" })
+    }
+}
 // 15. Write asynchronously to a file. (1 Grade)
 // • Input: path:"./async.txt", content:"Async save"
+{
+    function writeFile(pathName, content) {
+        fs.writeFile(pathName, content, { flag: "w" }, (err) => {
+            if (err) {
+
+                console.log(err);
+            }
+
+        })
+    }
+}
+
 // 16. Check if a directory exists. (0.5 Grade)
 // • Input Example: "./notes.txt"
 // • Output Example: true
+{
+    function cheackExist(pathName) {
+        return fs.existsSync(pathName)
+    }
+}
 // 17. Write a function that returns the OS platform and CPU architecture. (0.5 Grade)
 // • Output Example: {Platform: “win32”, Arch: “x64”}
+{
+    function getSystemInfo() {
+        return {
+            Platform: process.platform,
+            Arch: process.arch
+        };
+    }
 
+}
 
 
 function main() {
@@ -153,8 +181,10 @@ function main() {
     // console.log(getAbsolute("./main.js"));
     // console.log(twoPathMerge("/folder1", "folder2/file.txt"));
     // console.log(createFolder("test"));
-    asyncDeleteFile(path.resolve("./test/test.txt"));
-
-
+    // asyncDeleteFile(path.resolve("./test/test.txt"));
+    // writeFile(path.resolve("./notes.txt") , "from write func")
+    // console.log(readFile(path.resolve("./notes.txt")));
+    // console.log(cheackExist(path.resolve("./notes.txt")));
+    // console.log(getSystemInfo());
 }
 main()
